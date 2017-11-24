@@ -19,6 +19,8 @@ public class Main {
 			taquinFinal.toString(taille);
 			int nbMP = t.nbPiecesMalPlacee(t, taille);
 			LOGGER.info(nbMP + " pièces ne sont pas correctement placées");
+			int dM= t.distanceManhattan(t, taille);
+			System.out.println("La somme des distances de Manhattan est " + dM);
 			
 			//résolution taquin
 			//Interdire les états répétés
