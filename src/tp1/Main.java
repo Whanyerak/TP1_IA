@@ -1,3 +1,6 @@
+//TP Réalisé par Valentin MORIN et Dahavid DUPONT
+// Etudiants en MASTER TNSI à l'UVHC
+
 package tp1;
 
 import java.util.Scanner;
