@@ -37,7 +37,7 @@ public class Taquin {
 		}
 	}
 	
-	public String toString(int taille) {
+	public void toString(int taille) {
 		int i,j;
 		for (i=0;i<taille;i++) {
 			System.out.println("");
@@ -47,7 +47,7 @@ public class Taquin {
 			}
 			System.out.print("|");
 		}
-		return "";
+		System.out.println("");
 	}
 	
 	public int nbPiecesMalPlacee(Taquin taquin, int taille) {

@@ -3,24 +3,22 @@
 
 package tp1;
 
-import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Main {
-
+	private static final Logger LOGGER= Logger.getLogger(Main.class.getName());
+	
 		public static void main(String [] args)
 		{
 			final Taquin t=new Taquin();
 			final Taquin taquinFinal = new Taquin();
-			Scanner sc = new Scanner(System.in);
-			int taille = sc.nextInt();
+			int taille = 3;
 			t.initialisation(taille);
 			taquinFinal.initialisationEtatFinal(taille);
 			t.toString(taille);
-			System.out.println("");
 			taquinFinal.toString(taille);
 			int nbMP = t.nbPiecesMalPlacee(t, taille);
-			System.out.println("\n"+ nbMP + " pièces sont mal placées");
-			sc.close();
+			LOGGER.info(nbMP + " pièces ne sont pas correctement placées");
 			
 			//résolution taquin
 			//Interdire les états répétés
