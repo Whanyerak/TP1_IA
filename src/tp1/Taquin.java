@@ -26,6 +26,17 @@ public class Taquin {
 		}
 	}
 	
+	public void initialisationEtatFinal(int taille) {
+		int i,j,k;
+		k=0;
+		for (i=0;i<taille;i++) {
+			for(j=0;j<taille;j++) {
+				taquin[i][j]=k;
+				k++;
+			}
+		}
+	}
+	
 	public String toString(int taille) {
 		int i,j;
 		for (i=0;i<taille;i++) {
