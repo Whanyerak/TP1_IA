@@ -81,119 +81,39 @@ public class Taquin {
 	public int distanceManhattan(Taquin taquin, int taille) {
 		int dM = 0;
 		int x, y;
-		int x1, y1;
 		for (int i=0;i<taille;i++) {
 			for(int j=0;j<taille;j++) {
-				
-				if(this.taquin[i][j]==0) {
-					x= trouveX(0);
-					y = trouveY(0);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==1) {
-					x= trouveX(1);
-					y = trouveY(1);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==2) {
-					x= trouveX(2);
-					y = trouveY(2);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==3) {
-					x= trouveX(3);
-					y = trouveY(3);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==4) {
-					x= trouveX(4);
-					y = trouveY(4);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				if(this.taquin[i][j]==5) {
-					x= trouveX(5);
-					y = trouveY(5);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==6) {
-					x= trouveX(6);
-					y = trouveY(6);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==7) {
-					x= trouveX(7);
-					y = trouveY(7);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-				if(this.taquin[i][j]==8) {
-					x= trouveX(8);
-					y= trouveY(8);
-					x1=i;
-					y1=j;
-					calculX(x, x1, dM);
-					calculY(y, y1, dM);
-				}
-			  }
+				x= trouveX(this.taquin[i][j]);
+				y = trouveY(this.taquin[i][j]);
+				dM+=calculX(x, i);
+				dM+=calculY(y, j);
 			}
+		}
+		return dM;
+	}
+
+	public int calculX(int x, int x1) {
+		int dM = 0;
+		if(x1>x) {
+			dM += x1-x;
+			return dM;
+		}
+		if(x1<x) {
+			dM += x-x1;
+			return dM;
 		}
 		return dM;
 	}
 	
-	public int calculX(int x, int x1, int dM) {
-		if(x1>x) {
-			while(x1 != x) {
-				dM++;
-				x1++;
-			}
-			return dM;
-		}
-		if(x1<x) {
-			while(x1 != x) {
-				dM++;
-				x1--;
-			}
-			return dM;
-		}
-		if(x1 == x) {
-			return dM;
-		}
-		return dM;
-	}
-	public int calculY(int y, int y1, int dM) {
+	public int calculY(int y, int y1) {
+		int dM= 0;
 		if(y1>y) {
-			while(y1 != y) {
-				dM++;
-				y1++;
-			}
+			dM = y1-y;
+			return dM;
 		}
 		if(y1<y) {
-			while(y1 != y) {
-				dM++;
-				y1--;
-			}
+			dM = y-y1;
+			return dM;
 		}
 		return dM;
 	}
