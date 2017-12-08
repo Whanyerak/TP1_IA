@@ -12,15 +12,14 @@ public class Main {
 		{
 			final Taquin t=new Taquin();
 			final Taquin taquinFinal = new Taquin();
-			int taille = 3;
-			t.initialisation(taille);
-			taquinFinal.initialisationEtatFinal(taille);
-			t.toString(taille);
-			taquinFinal.toString(taille);
-			int nbMP = t.nbPiecesMalPlacee(t, taille);
+			t.initialisation();
+			taquinFinal.initialisationEtatFinal();
+			t.toString();
+			taquinFinal.toString();
+			int nbMP = t.nbPiecesMalPlacee();
 			LOGGER.info(nbMP + " pièces ne sont pas correctement placées");
-			int dM = t.distanceManhattan(t, taille);
-			System.out.println("La somme des distances de Manhattan est " + dM);
+			int dM = t.distanceManhattan();
+			LOGGER.info("La somme des distances de Manhattan est " + dM);
 			
 			//résolution taquin
 			//Interdire les états répétés

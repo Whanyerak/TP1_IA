@@ -6,20 +6,25 @@ import java.util.logging.Logger;
 
 public class Taquin {
 	private  static final Logger LOGGER = Logger.getLogger(Taquin.class.getName());
-	public int taquin[][] = new int[3][3];
+	int taille = 3;
+	public int taquin[][] = new int[taille][taille];
 	
 	
 	public Taquin() {
+		super();
 	}
 	
-	public void initialisation(int taille) {
-		int i,j,k, l;
+	public void initialisation() {
+		int i;
+		int j;
+		int k;
+		int l;
 		List<Integer> list = new ArrayList<>();
-		for(i=0; i<taille*taille; i++) {
+		for(i=0; i<this.taille*this.taille; i++) {
 			list.add(i);
 		}
-		for (i=0;i<taille;i++) {
-			for(j=0;j<taille;j++) {
+		for (i=0;i<this.taille;i++) {
+			for(j=0;j<this.taille;j++) {
 				k=(int) (Math.random()*list.size());
 				l=list.get(k);
 				taquin[i][j]=l;
@@ -28,47 +33,48 @@ public class Taquin {
 		}
 	}
 	
-	public void initialisationEtatFinal(int taille) {
+	public void initialisationEtatFinal() {
 		int i,j,k;
 		k=0;
-		for (i=0;i<taille;i++) {
-			for(j=0;j<taille;j++) {
+		for (i=0;i<this.taille;i++) {
+			for(j=0;j<this.taille;j++) {
 				taquin[i][j]=k;
 				k++;
 			}
 		}
 	}
 	
-	public void toString(int taille) {
+	public String toString() {
 		int i,j;
-		for (i=0;i<taille;i++) {
+		for (i=0;i<this.taille;i++) {
 			System.out.println("");
-			for(j=0;j<taille;j++) {
+			for(j=0;j<this.taille;j++) {
 				System.out.print("|");
 				System.out.print(taquin[i][j]);
 			}
 			System.out.print("|");
 		}
 		System.out.println("");
+		return null;
 	}
 	
-	public int nbPiecesMalPlacee(Taquin taquin, int taille) {
-		int nbPM=0, i , j , k;
-		for (i=0;i<taille;i++) {
+	public int nbPiecesMalPlacee() {
+		int nbPM=0;
+		int i;
+		int j;
+		int k;
+		for (i=0;i<this.taille;i++) {
 			for(j=0;j<taille;j++) {
 				switch(i) {
-					case 0 : {
+					case 0 : 
 						k = 0;
 						break;
-					}
-					case 1 : {
+					case 1 : 
 						k = 3;
 						break; 
-					}
-					case 2 : {
+					case 2 : 
 						k = 6;
 						break;
-					}
 					default : k=0;
 				}
 				if(this.taquin[i][j] != j+k)
@@ -78,11 +84,11 @@ public class Taquin {
 		return nbPM;
 	}
 	
-	public int distanceManhattan(Taquin taquin, int taille) {
+	public int distanceManhattan() {
 		int dM = 0;
 		int x, y;
-		for (int i=0;i<taille;i++) {
-			for(int j=0;j<taille;j++) {
+		for (int i=0;i<this.taille;i++) {
+			for(int j=0;j<this.taille;j++) {
 				x= trouveX(this.taquin[i][j]);
 				y = trouveY(this.taquin[i][j]);
 				dM+=calculX(x, i);
