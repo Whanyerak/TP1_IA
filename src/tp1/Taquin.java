@@ -117,6 +117,18 @@ public class Taquin {
 		}
 		return dM;
 	}
+	
+	public int distanceManhattanUnique(int i, int j) {
+		int dM = 0;
+		int x;
+		int y;
+		x= trouveX(this.taquin[i][j]);
+		y = trouveY(this.taquin[i][j]);
+		dM+=calculX(x, i);
+		dM+=calculY(y, j);
+		
+		return dM;
+	}
 
 	public int calculX(int x, int x1) {
 		int dM = 0;
