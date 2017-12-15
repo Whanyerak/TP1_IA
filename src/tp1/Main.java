@@ -3,6 +3,8 @@
 
 package tp1;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class Main {
@@ -12,7 +14,8 @@ public class Main {
 		{
 			final Taquin t=new Taquin();
 			final Taquin taquinFinal = new Taquin();
-			t.initialisation();
+			//t.initialisation();
+			
 			taquinFinal.initialisationEtatFinal();
 			t.toString();
 			taquinFinal.toString();
@@ -20,6 +23,11 @@ public class Main {
 			LOGGER.info(nbMP + " pièces ne sont pas correctement placées");
 			int dM = t.distanceManhattan();
 			LOGGER.info("La somme des distances de Manhattan est " + dM);
+			
+			List<int[][]> etats = new ArrayList<>();
+			t.deplacer(etats);
+			etats.add(t.getTaquin());
+			
 			
 			//résolution taquin
 			//Interdire les états répétés

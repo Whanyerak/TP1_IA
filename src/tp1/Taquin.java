@@ -7,13 +7,30 @@ import java.util.logging.Logger;
 public class Taquin {
 	private  static final Logger LOGGER = Logger.getLogger(Taquin.class.getName());
 	int taille = 3;
-	public int taquin[][] = new int[taille][taille];
-	
-	
+	public int[][] taquin = {{1,5,6},
+							{2,8,0},
+							{3,7,4}};
+		
 	public Taquin() {
 		super();
 	}
 	
+	public int getTaille() {
+		return taille;
+	}
+
+	public void setTaille(int taille) {
+		this.taille = taille;
+	}
+
+	public int[][] getTaquin() {
+		return taquin;
+	}
+
+	public void setTaquin(int[][] taquin) {
+		this.taquin = taquin;
+	}
+
 	public void initialisation() {
 		int i;
 		int j;
@@ -34,8 +51,9 @@ public class Taquin {
 	}
 	
 	public void initialisationEtatFinal() {
-		int i,j,k;
-		k=0;
+		int i;
+		int j;
+		int k=0;
 		for (i=0;i<this.taille;i++) {
 			for(j=0;j<this.taille;j++) {
 				taquin[i][j]=k;
@@ -45,7 +63,8 @@ public class Taquin {
 	}
 	
 	public String toString() {
-		int i,j;
+		int i;
+		int j;
 		for (i=0;i<this.taille;i++) {
 			System.out.println("");
 			for(j=0;j<this.taille;j++) {
@@ -86,7 +105,8 @@ public class Taquin {
 	
 	public int distanceManhattan() {
 		int dM = 0;
-		int x, y;
+		int x;
+		int y;
 		for (int i=0;i<this.taille;i++) {
 			for(int j=0;j<this.taille;j++) {
 				x= trouveX(this.taquin[i][j]);
@@ -135,10 +155,9 @@ public class Taquin {
 			case 6 : return 2;
 			case 7 : return 2;
 			case 8 : return 2;
-			default : {
+			default : 
 				LOGGER.warning("Warning : Il y a eu un incident avec les valeurs, X= -1");
 				return -1;
-			}
 		}
 	}
 	
@@ -153,10 +172,43 @@ public class Taquin {
 			case 6 : return 0;
 			case 7 : return 1;
 			case 8 : return 2;
-			default : {
+			default : 
 				LOGGER.warning("Warning : Il y a eu un incident avec les valeurs, Y= -1");
 				return -1;
+		}
+	}
+	
+	public boolean equals(Object o) {
+		Taquin other = (Taquin) o;
+		if(getTaille() != other.taille) {
+			return false;
+		}
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				if(this.taquin[i][j]!= other.taquin[i][j]) {
+					return false;
+				}
 			}
 		}
+		return true;
+	}
+	
+	public void deplacer(List<int[][]> etats) {
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				if(this.taquin[i][j]==0) {
+					
+				}
+			}
+		}
+	}
+	
+	public boolean verifieEtat(List<int[][]> etats) {
+		for(int[][] etat : etats) {
+			if(this.taquin.equals(etat)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
