@@ -260,4 +260,5 @@ public class Taquin {
 		}
 		return true;
 	}
+	
 }

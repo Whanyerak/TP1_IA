@@ -39,11 +39,12 @@ public class Main {
 			int[]coordonnesCase0 = t.trouve0();
 			int[]coordonnesPieceADeplacer = t.trouvePieceADeplacer();
 			
-			t.deplacer(etats, coordonnesCase0, coordonnesPieceADeplacer);
-			t.toString();
-			//fonction pour trouver taquin[i][j]= 0
-			//fontion pour récupérer les pieces autour du 0 /!\ ne pas dépasser les bornes du tableau sinon exception outOfBounts
-			//récupérer les distances de manhattan des pieces autour du 0
-			//fonction déplacer pour déplacer un piece dans le taquin
+			for(int i = 0; i<5 ;i++) {
+				t.deplacer(etats, coordonnesCase0, coordonnesPieceADeplacer);
+				t.toString();
+			}
+		
+			//fonction pour interdire les etats répétés : si etat présent dans la liste "etats" faire la fonction déplacer avec une autre piece
+			// comment faire? ça yéssépo
 		}
 }
