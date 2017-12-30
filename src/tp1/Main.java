@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class Main {
 	private static final Logger LOGGER= Logger.getLogger(Main.class.getName());
 	
-		public static void main(String [] args)
+		public static void main(String [] args) throws Exception
 		{
 			final Taquin t=new Taquin();
 			final Taquin taquinFinal = new Taquin();
@@ -35,9 +35,12 @@ public class Main {
 			}
 			
 			List<int[][]> etats = new ArrayList<>();
-			t.deplacer(etats);
-			etats.add(t.getTaquin());
 			
+			int[]coordonnesCase0 = t.trouve0();
+			int[]coordonnesPieceADeplacer = t.trouvePieceADeplacer();
+			
+			t.deplacer(etats, coordonnesCase0, coordonnesPieceADeplacer);
+			t.toString();
 			//fonction pour trouver taquin[i][j]= 0
 			//fontion pour récupérer les pieces autour du 0 /!\ ne pas dépasser les bornes du tableau sinon exception outOfBounts
 			//récupérer les distances de manhattan des pieces autour du 0

@@ -205,14 +205,51 @@ public class Taquin {
 		return true;
 	}
 	
-	public void deplacer(List<int[][]> etats) {
+	public void deplacer(List<int[][]> etats, int[] coord0, int[] coordPieceADeplacer) {
+		int tmp = 0;
+		tmp = this.taquin[coord0[0]][coord0[1]];
+		this.taquin[coord0[0]][coord0[1]] = this.taquin[coordPieceADeplacer[0]][coordPieceADeplacer[1]];
+		this.taquin[coordPieceADeplacer[0]][coordPieceADeplacer[1]] = tmp;
+		
+		etats.add(taquin);
+	}
+	
+	/**
+	 *  trouve les coordonnées de la case 0
+	 * @param x
+	 * @param y
+	 * @throws Exception 
+	 */
+	public int[] trouve0() throws Exception{
 		for(int i=0; i<3; i++) {
 			for(int j=0; j<3; j++) {
-				if(this.taquin[i][j]==0) {
-					
+				if(taquin[i][j]==0) {
+					return new int[]{i,j};
 				}
 			}
 		}
+		throw new Exception("il n'y a pas de case 0 dans le taquin");
+	}
+	
+	public int[] trouvePieceADeplacer() throws Exception{
+		int k = 999;// on initialise à très grand pour etre sur de récup la premiere valeur
+		int tmp = 0;
+		int[] coordonnees = trouve0();
+		int[] coordPieceAdeplacer = {999,999};
+		for(int i=0; i<3; i++) {
+			for(int j=0; j<3; j++) {
+				//on recherche la piece avec le moins de distance de manhattan autour du 0
+				if(((i == coordonnees[0]+1 || i == coordonnees[0]-1)&& j == coordonnees[1]) || ((j==coordonnees[1]+1 || j == coordonnees[1]-1)&& i == coordonnees[0])) {
+					tmp = distanceManhattanUnique(i, j);
+					if(tmp < k) {
+						k = tmp;
+						coordPieceAdeplacer[0] = i;
+						coordPieceAdeplacer[1] = j;
+					}
+				}
+			}
+		}
+		return coordPieceAdeplacer;
 	}
 	
 	public boolean verifieEtat(List<int[][]> etats) {
