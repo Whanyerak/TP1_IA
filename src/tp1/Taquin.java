@@ -1,5 +1,5 @@
 //TP Réalisé par Valentin MORIN et David DUPONT
-// Etudiants en MASTER 1 TNSI à l'UVHC
+//Etudiants en MASTER 1 TNSI à l'UVHC
 
 package tp1;
 
@@ -282,6 +282,7 @@ public class Taquin {
 
 		ouverts.add(this);
 		while(ouverts.size() > 0) {
+			
 			Taquin courant = new Taquin();
 			Taquin haut    = new Taquin();
 			Taquin bas     = new Taquin();
@@ -289,8 +290,8 @@ public class Taquin {
 			Taquin droite  = new Taquin();
 
 			//Debug de la taille des listes ouverts et fermes.
-//			System.out.println("ouverts : " + ouverts.size());
-//			System.out.println("fermes : " + fermes.size());
+			System.out.println("ouverts : " + ouverts.size());
+			System.out.println("fermes : " + fermes.size());
 
 			//On tri la liste des noeuds ouverts par ordre d'heuristique croissant.
 			Collections.sort(ouverts, new Comparator<Taquin>() {
