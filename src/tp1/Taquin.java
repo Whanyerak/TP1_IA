@@ -1,4 +1,4 @@
-//TP Réalisé par Valentin MORIN et Dahavid DUPONT
+//TP Réalisé par Valentin MORIN et David DUPONT
 // Etudiants en MASTER 1 TNSI à l'UVHC
 
 package tp1;
@@ -11,12 +11,28 @@ public class Taquin {
 	
 	public int taille = 3;
 	public int[][] taquin = new int[taille][taille];
-	public int mauvaisePosition; 
-	public int manhattan; 
-	public int nbCoups;
-	public Integer f;		//Correspond au nombre de coup joués + la distance de Manhattan = heuristique
-//	public Taquin taquinParent;
+	public int mauvaisePosition;	//Correspond au nombre de pièces mal placées
+	public int manhattan; 			//Correspond à la distance de Manhattan
+	public int nbCoups;				//Correspond au nombre de coup joués
+	public Integer f;				//Correspond au nombre de coup joués + la distance de Manhattan = heuristique
 
+
+	//On redéfini la méthode equals() afin que la comparaison des taquins se fasse uniquement sur la grille
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Taquin) {
+			int i, j;
+		
+			for(i=0; i<taille; i++)
+				for(j=0; j<taille; j++)
+					if(((Taquin) obj).taquin[i][j] != this.taquin[i][j])
+						return false;
+		}
+		
+	    return true;
+	}
+	
+	
 	//Procédure d'initialisation de l'état final du taquin recherché.
 	public void initTaquinFinal() {
 		int i, j, v = 0;
@@ -31,9 +47,9 @@ public class Taquin {
 		this.manhattan = 0;
 		this.nbCoups = 0;
 		this.f = 0;
-		//this.taquinParent = null;
 	}
 
+	
 	//Procédure d'initialisation d'un taquin aléatoire.
 	public void initTaquin() {
 		int i, j, x;
@@ -50,10 +66,10 @@ public class Taquin {
 				taquin[i][j] = v.get(x);
 				v.remove(x);
 			}
-		
-		//this.taquinParent = null;
+
 	}
 
+	
 	//Procédure permettant de calculer le nombre de pièces mal placées sur le taquin.
 	void nbPieceMalPositionnees() {
 		int i, j, x = 0;
@@ -68,6 +84,7 @@ public class Taquin {
 		this.mauvaisePosition = x;
 	}
 
+	
 	//Procédure permettant de chercher la position d'une pièce du taquin.
 	int[] cherchePosition(int valeur) {
 		int i,j;
@@ -84,6 +101,7 @@ public class Taquin {
 		return pos;
 	}
 
+	
 	//Procédure permettant de calculer la distance de Manhattan du taquin.
 	void distanceManhattan() {
 		int i, j, m = 0;
@@ -109,6 +127,7 @@ public class Taquin {
 		this.manhattan = m;
 	}
 
+	
 	//Procédure permettant de déplacer une pièce à gauche.
 	void mouvementGauche() {
 		int x, y;
@@ -126,6 +145,7 @@ public class Taquin {
 		
 	}
 
+	
 	//Procédure permettant de déplacer une pièce à droite.
 	void mouvementDroite() {
 		int x, y;
@@ -143,6 +163,7 @@ public class Taquin {
 		
 	}
 
+	
 	//Procédure permettant de déplacer une pièce vers le bas.
 	void mouvementBas() {
 		int x,y;
@@ -160,6 +181,7 @@ public class Taquin {
 
 	}
 
+	
 	//Procédure permettant de déplacer une pièce vers le haut.
 	void mouvementHaut() {
 		int x,y;
@@ -177,6 +199,7 @@ public class Taquin {
 
 	}
 
+	
 	//Procédure permettant de copier le taquin dans un autre.
 	void copie(Taquin autre) {
 		int i, j;
@@ -188,11 +211,10 @@ public class Taquin {
 		autre.mauvaisePosition = this.mauvaisePosition;
 		autre.manhattan		   = this.manhattan;
 		autre.nbCoups 		   = this.nbCoups;
-		autre.f 			   = this.f;
-		//autre.taquinParent     = this.taquinParent;
-		
+		autre.f 			   = this.f;		
 	}
 
+	
 	//Procédure de comparaison du taquin avec un autre (retourne 1 si égaux)
 	int compare(Taquin autre) {
 		int i, j;
@@ -214,6 +236,7 @@ public class Taquin {
 		return 1;
 	}
 
+	
 	//Procédure permettant d'afficher le taquin.
 	public void afficheTaquin() {
 		int i, j, k;
@@ -243,6 +266,7 @@ public class Taquin {
 		System.out.print("f : " + this.f + "\n");
 	}
 
+	
 	//Procédure exécutant l'algorithme A*.
 	public void aEtoile() {
 		
@@ -259,10 +283,10 @@ public class Taquin {
 		ouverts.add(this);
 		while(ouverts.size() > 0) {
 			Taquin courant = new Taquin();
-			Taquin haut = new Taquin();
-			Taquin bas = new Taquin();
-			Taquin gauche = new Taquin();
-			Taquin droite = new Taquin();
+			Taquin haut    = new Taquin();
+			Taquin bas     = new Taquin();
+			Taquin gauche  = new Taquin();
+			Taquin droite  = new Taquin();
 
 			//Debug de la taille des listes ouverts et fermes.
 //			System.out.println("ouverts : " + ouverts.size());
@@ -302,10 +326,9 @@ public class Taquin {
 			haut.nbPieceMalPositionnees();
 			haut.distanceManhattan();
 			//On vérifie que le mouvement à bien été effectué et on complète les infos du taquin fils s'il n'a pas déjà été traité.
-			if(haut.compare(courant) == 0 && !fermes.contains(haut)) {
+			if(haut.compare(courant) == 0) {
 				haut.nbCoups 	  = haut.nbCoups + 1;
 				haut.f 			  = haut.nbCoups + haut.manhattan;
-				//haut.taquinParent = courant;
 				fils.add(haut);
 			}
 
@@ -313,10 +336,9 @@ public class Taquin {
 			droite.nbPieceMalPositionnees();
 			droite.distanceManhattan();
 			//On vérifie que le mouvement à bien été effectué et on complète les infos du taquin fils s'il n'a pas déjà été traité.
-			if(droite.compare(courant) == 0 && !fermes.contains(droite)) {
+			if(droite.compare(courant) == 0) {
 				droite.nbCoups = droite.nbCoups + 1;
 				droite.f = droite.nbCoups + droite.manhattan;
-				//droite.taquinParent = courant;
 				fils.add(droite);
 			}
 
@@ -324,10 +346,9 @@ public class Taquin {
 			bas.nbPieceMalPositionnees();
 			bas.distanceManhattan();
 			//On vérifie que le mouvement à bien été effectué et on complète les infos du taquin fils s'il n'a pas déjà été traité.
-			if(bas.compare(courant) == 0 && !fermes.contains(bas)) {
+			if(bas.compare(courant) == 0) {
 				bas.nbCoups = bas.nbCoups + 1;
 				bas.f = bas.nbCoups + bas.manhattan;
-				//bas.taquinParent = courant;
 				fils.add(bas);
 			}
 
@@ -335,10 +356,9 @@ public class Taquin {
 			gauche.nbPieceMalPositionnees();
 			gauche.distanceManhattan();
 			//On vérifie que le mouvement à bien été effectué et on complète les infos du taquin fils s'il n'a pas déjà été traité.
-			if(gauche.compare(courant) == 0 && !fermes.contains(gauche)) {
+			if(gauche.compare(courant) == 0) {
 				gauche.nbCoups = gauche.nbCoups + 1;
 				gauche.f = gauche.nbCoups + gauche.manhattan;
-				//gauche.taquinParent = courant;
 				fils.add(gauche);
 			}
 
@@ -351,27 +371,24 @@ public class Taquin {
 					noeud.afficheTaquin();
 					return;
 			
-				/*Les conditions ci-dessous ne fonctionnent pas, en effet le programme entre toujours dans le premier if
-				mais jamais dans les suivants. Le problème vient de la comparaison avec la liste "ouvert".*/
 				} else {
-					//	System.out.println("action");
+					//On teste différents cas d'existance de la grille dans les listes.
 					if (!ouverts.contains(noeud) && !fermes.contains(noeud)) {
-						System.out.println("action");
+						//System.out.println("action");
 						ouverts.add(noeud);
 					} else if (ouverts.contains(noeud) && ouverts.get(ouverts.indexOf(noeud)).f < noeud.f) {
-						System.out.println("action2");
+						//System.out.println("action2");
 						ouverts.remove(ouverts.indexOf(noeud));
 						ouverts.add(noeud);
 					} else if ((fermes.contains(noeud)) && fermes.get(fermes.indexOf(noeud)).f < noeud.f) {
-						System.out.println("action3");
+						//System.out.println("action3");
 						fermes.remove(noeud);
 						ouverts.add(noeud);
-					} else System.out.println("bite");
+					}
 				}
 
-				//On ajoute le noeud à la liste des noeuds ouverts.
-				//ouverts.add(noeud);
 			}
+			
 			//On vide la liste des fils.
 			fils.clear();
 		}
